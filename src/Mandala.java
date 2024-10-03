@@ -7,8 +7,8 @@ public class Mandala extends JFrame {
     private int figuraSeleccionada = 0; // 1 - Circulo, 2 - Cuadrado, 3 - Linea, 4 - Ovalo
     private BufferedImage buffer;
     private Color red = Color.BLACK;
-    private Color spaceBlue = new Color(28,31,117);
-    private Color orange = new Color(245,94,34);
+    private Color spaceBlue = new Color(28, 31, 117);
+    private Color orange = new Color(245, 94, 34);
     private Color yellow = new Color(131, 135, 22);
     private DrawPanel drawPanel;
 
@@ -22,8 +22,8 @@ public class Mandala extends JFrame {
         centroX = 200;
         centroY = 100;
         radio = 50;
-        ovalo(220,190,200, 150);
-        ovalo(220,190,150, 200);
+        ovalo(220, 190, 200, 150);
+        ovalo(220, 190, 150, 200);
         linea(220, 90, 220, 290, orange);
         linea(120, 190, 320, 190, orange);
         linea(220, 90, 120, 190, orange);
@@ -36,39 +36,25 @@ public class Mandala extends JFrame {
         linea(220, 0, 220, 380, yellow);
         linea(220, 0, 440, 190, yellow);
         linea(220, 0, 0, 190, yellow);
-        linea(220, 380, 440, 190,yellow);
+        linea(220, 380, 440, 190, yellow);
         linea(220, 380, 0, 190, yellow);
         linea(0, 190, 220, 0, yellow);
         linea(440, 190, 220, 0, yellow);
         linea(0, 190, 220, 380, yellow);
         linea(440, 190, 220, 380, yellow);
         int lado = 50;
-        for (int i = lado; i < 300; i+= 150) {
+        for (int i = lado; i < 450; i += 150) {
             cuadrado(220, 190, i);
         }
         linea(220, 190, 220, 240, spaceBlue);
         linea(170, 140, 270, 240, spaceBlue);
 
-
-        for(int i = 0; i < 12; i++) {
-
+        for (int i = 0; i < 12; i++) {
             centroX += 50 * Math.cos(Math.toRadians(30 * i));
             centroY += 50 * Math.sin(Math.toRadians(30 * i));
             circulo((int) centroX, (int) centroY, (int) radio);
             linea(220, 190, (int) centroX, (int) centroY, spaceBlue);
-
-
         }
-        centroX = 175;
-        centroY = 10;
-        for(int i = 0; i < 12; i++) {
-
-            centroX += 100 * Math.cos(Math.toRadians(30 * i));
-            centroY += 100 * Math.sin(Math.toRadians(30 * i));
-            circulo((int) centroX, (int) centroY, (int) radio);
-
-        }
-
         setTitle("Dibujar Mandala");
         setSize(450, 450);
         setLocationRelativeTo(null);
@@ -88,8 +74,11 @@ public class Mandala extends JFrame {
         @Override
         protected void paintComponent(Graphics graphics) {
             super.paintComponent(graphics);
-            graphics.drawImage(buffer, 0, 0, this);
+            Graphics2D g2d = (Graphics2D) graphics;
+            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+            g2d.drawImage(buffer, 0, 0, this);
         }
+
     }
 
     public void putPixel(int x, int y, Color color) {
